@@ -1,0 +1,113 @@
+组件：jeeXxxYyy
+
+js:
+
+使用箭头函数 ，参数为一个时不使用括号，尽量使用async/await处理嵌套的异步函数，散装数据使用vdata，vdata里尽量不要再装对象，不会变动的对象不要使用ref包装，存在返回值的函数使用 `@params`注释 ,函数命名动词+名词，推荐foreach，for of代替for循环
+
+```js
+//good
+const vdata = reactive({
+    a:1,
+    b:2
+})
+//bad
+const vdata = reactive({
+    a:1,
+    b:2,
+    c:{
+        d:1,
+        e:3
+    }
+    
+})
+
+//good
+const getList = e =>{
+    console.log(e)
+}
+//bad
+const getList =(e) =>{
+    console.log(e)
+}
+function getList(e){
+    conssole.log(e)
+}
+
+//good
+/*
+    @params {String} a
+    @params {Number} b
+    @return {Number} c
+*/
+const addNumber = (a,b) =>{
+    return a+b
+}
+//bad
+//处理两数之和
+const addNumber = (a,b) =>{
+    return a+b
+}
+
+//good
+const getLocation = () =>{
+    return new Promise((resolve,reject) =>{
+        uni.showLoading()
+        uni.request({
+            url: 'https://restapi.amap.com/v3/geocode/geo', // 调用高德接口
+            data: {
+                key: '98411a82a0b9e381969215700784235e',
+                address: this.detailArea
+            },
+            success:  res => {
+                console.log(123)
+                resolve(res)
+            },
+            fail:err => {console.log(err) reject(err)}
+        });
+    })
+}
+const useLocal = (res) =>{
+    console.log(res)
+}
+
+async const displayData =() =>{
+   let res =  await getLocation()
+    await useLocal(res)
+}
+//bad
+const getLocation = () =>{ 
+        uni.showLoading()
+        uni.request({
+            url: 'https://restapi.amap.com/v3/geocode/geo', // 调用高德接口
+            data: {
+                key: '98411a82a0b9e381969215700784235e',
+                address: this.detailArea
+            },
+            success:  res => {
+                console.log(123)
+                useLocal(res)
+            },
+            fail:err => {console.log(err) }
+        });
+
+}
+const useLocal = (res) =>{
+    console.log(res)
+}
+//good 
+const list = [1,2,3,4]
+list.forEach(item =>{
+    console.log(item)
+})
+//not good
+for(let i=0;i>=list.length;i++){
+    console.log(list[i])
+}
+```
+
+
+
+sass
+
+嵌套最多不超过3层，长命名使用`-`链接，可以使用 `@extent` 复用样式， 行内样式不要写`flex`相关 ，字体、颜色等可以在一个样式文件中统一定义 
+

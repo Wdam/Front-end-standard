@@ -103,6 +103,35 @@ list.forEach(item =>{
 for(let i=0;i>=list.length;i++){
     console.log(list[i])
 }
+
+//对象取值
+const obj ={
+    a:1,b:2,c:3
+}
+
+//bad
+const a = obj.a
+const b = obj.b
+//good 
+const {a,b,c} = obj || {}
+const {a:a1} = obj
+
+//合并数据
+const a = [1,2,3,4]
+const b= [3,4,5,6]
+const obj1 = {
+    a:1
+}
+const obj2 = {
+    b:1
+}
+//bad
+const c = a.concat(b)
+const obj = Object.assign({},obj1,obj2)
+//good 
+const c = [...new Set([...a,...b])]
+const obj = {...obj1,...obj2}
+
 ```
 
 

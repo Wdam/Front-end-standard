@@ -5,6 +5,7 @@ js:
 使用箭头函数 ，参数为一个时不使用括号，尽量使用async/await处理嵌套的异步函数，散装数据使用vdata，vdata里尽量不要再装对象，不会变动的对象不要使用ref包装，存在返回值的函数使用 `@params`注释 ,函数命名动词+名词，推荐foreach，for of代替for循环
 
 ```js
+//对象里避免再加对象
 //good
 const vdata = reactive({
     a:1,
@@ -20,7 +21,7 @@ const vdata = reactive({
     }
     
 })
-
+//箭头函数接受值
 //good
 const getList = e =>{
     console.log(e)
@@ -33,6 +34,7 @@ function getList(e){
     conssole.log(e)
 }
 
+//函数参数注释
 //good
 /*
     @params {String} a
@@ -47,7 +49,7 @@ const addNumber = (a,b) =>{
 const addNumber = (a,b) =>{
     return a+b
 }
-
+//async await使用
 //good
 const getLocation = () =>{
     return new Promise((resolve,reject) =>{
@@ -55,7 +57,7 @@ const getLocation = () =>{
         uni.request({
             url: 'https://restapi.amap.com/v3/geocode/geo', // 调用高德接口
             data: {
-                key: '98411a82a0b9e381969215700784235e',
+                key: '1234',
                 address: this.detailArea
             },
             success:  res => {
@@ -80,7 +82,7 @@ const getLocation = () =>{
         uni.request({
             url: 'https://restapi.amap.com/v3/geocode/geo', // 调用高德接口
             data: {
-                key: '98411a82a0b9e381969215700784235e',
+                key: '123456',
                 address: this.detailArea
             },
             success:  res => {
@@ -94,6 +96,7 @@ const getLocation = () =>{
 const useLocal = (res) =>{
     console.log(res)
 }
+//遍历数组
 //good 
 const list = [1,2,3,4]
 list.forEach(item =>{

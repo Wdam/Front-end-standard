@@ -2,25 +2,10 @@
 
 js:
 
-使用箭头函数 ，参数为一个时不使用括号，尽量使用async/await处理嵌套的异步函数，散装数据使用vdata，vdata里尽量不要再装对象，不会变动的对象不要使用ref包装，存在返回值的函数使用 `@params`注释 ,函数命名动词+名词，推荐foreach，for of代替for循环
+使用箭头函数 ，参数为一个时不使用括号，尽量使用async/await处理嵌套的异步函数，散装数据使用vdata，不会变动的对象不要使用ref包装，存在返回值的函数使用 `@params`注释 ,函数命名动词+名词，推荐foreach，for of代替for循环
 
 ```js
-//对象里避免再加对象
-//good
-const vdata = reactive({
-    a:1,
-    b:2
-})
-//bad
-const vdata = reactive({
-    a:1,
-    b:2,
-    c:{
-        d:1,
-        e:3
-    }
-    
-})
+
 //箭头函数接受值
 //good
 const getList = e =>{
